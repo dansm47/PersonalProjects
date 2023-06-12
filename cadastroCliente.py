@@ -1,50 +1,52 @@
 import os
 
-class Cadastro:
-    
-    def __init__(self,usuario,senha):
-        self.listaClientes = []
-        self.usuario = usuario
-        self.senha = senha
+ClientesNomes = []
+ClientesCode = []
 
-    def cadastrar(self):
-        novoCad = []
-        novoCad.append(self.usuario)
-        novoCad.append(self.senha)
-        self.listaClientes.append(novoCad)
+def CadastrarCliente():
+   
+    clienteNome = input('Nome do cliente :')
+    clienteCode = input('Codigo do cliente :')
+    ClientesNomes.append(clienteNome)
+    ClientesCode.append(clienteCode)
+    input ('[ENTER] PARA CONTINUAR')
 
-    def listarClientes(self):
-        os.system('clear')
-        print('Lista de clientes:')
-        for i in range(len(self.listaClientes)):
-            print(f'{i+1}. Usuário: {self.listaClientes[i][0]}, Senha: {self.listaClientes[i][1]}')
-    
+def VerificarStatusCliente():
+    cliente = input('PESQUISA :')
 
-clientes = Cadastro(None, None)
+    if cliente in ClientesNomes or ClientesCode:
+        print('Cliente já cadastrado')
+    else:
+        print('Cliente não cadastrado')
+    input ('[ENTER] PARA CONTINUAR')
 
-for i in range(3):
-    usuario = input('Digite o nome de usuário: ')
-    senha = input('Digite a senha: ')
-    new = Cadastro(usuario, senha)
-    new.cadastrar()
-    clientes.listaClientes.extend(new.listaClientes)
-
-clientes.listarClientes()
-
+def ListarClientes():
+    i = len(ClientesNomes)
+    j = 0
+    print('LISTA DE CLIENTES')
+    while j < i:
+        print(f'Nome :{ClientesNomes[j]} | Codigo :{ClientesCode[j]}')
+        j += 1
+    input('[ENTER] - Para continuar')
     
 
+while True:
+    os.system('clear')
+    print('-----------MENU------------')
+    print('[1] - CADASTRAR')
+    print('[2] - VERIFICAR CLIENTE')
+    print('[3] - LISTAR CLIENTES')
+    print('[4] - SAIR')
+    op = input('>>')
 
-
-    
-            
-    
-
-
-
-
-
-
-
+    if op == '1':
+        CadastrarCliente()
+    elif op == '2':
+        VerificarStatusCliente()
+    elif op == '3':
+        ListarClientes()
+    elif op == '4':
+        break
 
 
 
