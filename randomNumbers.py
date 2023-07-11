@@ -1,6 +1,8 @@
+from random import randint   
+
 class Random:
     def __init__(self):
-        from random import randint   
+
         self.num = randint(0,10)
 
     def JogoAdivinhacao(self):
@@ -18,7 +20,4 @@ class Random:
                 print('erro')
 
 
-adivinhacao= Random()
-
-adivinhacao.JogoAdivinhacao()
 
