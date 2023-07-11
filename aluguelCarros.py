@@ -187,6 +187,11 @@ def alugarVeiculo():
     validar, indice_cliente = login()
 
     if validar and indice_cliente is not None:
+        if CarroAlugado[indice_cliente] is not None:
+            print('Você já possui um veículo alugado.')
+            pausar_execucao()
+            return
+
         l = len(nomeVeiculo)
 
         if l == 0:
@@ -212,7 +217,7 @@ def alugarVeiculo():
 
                     if SaldoCliente[indice_cliente] >= valor_total:
                         CarroAlugado[indice_cliente] = indice_veiculo
-                        HorasAluguel[indice_cliente] = horas_aluguel
+                        HorasAluguel.append(horas_aluguel)  # Correção: adiciona as horas de aluguel na lista
                         SaldoCliente[indice_cliente] -= valor_total
 
                         os.system('clear')
