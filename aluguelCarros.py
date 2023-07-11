@@ -31,8 +31,7 @@ def cadastrarCliente():
     EnderecoCliente.append(endereco)
     TelefoneCliente.append(telefone)
     SaldoCliente.append(0)
-    CarroAlugado.append(None)  # Adiciona None como valor padrão para CarroAlugado
-    HorasAluguel.append(None)  # Adiciona None como valor padrão para HorasAluguel
+    CarroAlugado.append(None) 
 
     os.system('clear')
     print('========== CLIENTE CADASTRADO COM SUCESSO!')
@@ -86,6 +85,85 @@ def pesquisarCliente():
     pausar_execucao()
 
 
+def editarInformacoes():
+    os.system('clear')
+    print('========== EDITAR INFORMAÇÕES DO CLIENTE')
+    print()
+    validar, indice_cliente = login()
+
+    if validar and indice_cliente is not None:
+        print('Opções de edição:')
+        print('[1] - Nome')
+        print('[2] - CPF')
+        print('[3] - Senha')
+        print('[4] - Endereço')
+        print('[5] - Telefone')
+        print()
+        op = input('Digite a opção desejada: ')
+
+        if op == '1':
+            novo_nome = input('Digite o novo nome: ')
+            NomeCliente[indice_cliente] = novo_nome
+            print('Nome atualizado com sucesso!')
+        elif op == '2':
+            novo_cpf = input('Digite o novo CPF: ')
+            CpfCliente[indice_cliente] = novo_cpf
+            print('CPF atualizado com sucesso!')
+        elif op == '3':
+            nova_senha = input('Digite a nova senha: ')
+            SenhaCliente[indice_cliente] = nova_senha
+            print('Senha atualizada com sucesso!')
+        elif op == '4':
+            novo_endereco = input('Digite o novo endereço: ')
+            EnderecoCliente[indice_cliente] = novo_endereco
+            print('Endereço atualizado com sucesso!')
+        elif op == '5':
+            novo_telefone = input('Digite o novo telefone: ')
+            TelefoneCliente[indice_cliente] = novo_telefone
+            print('Telefone atualizado com sucesso!')
+        else:
+            print('Opção inválida!')
+
+    else:
+        print('Login inválido')
+
+    pausar_execucao()
+
+
+def excluirCadastro():
+    os.system('clear')
+    print('========== EXCLUIR CADASTRO')
+    print()
+    validar, indice_cliente = login()
+
+    if validar and indice_cliente is not None:
+        print('Tem certeza de que deseja excluir o cadastro? Essa ação não pode ser desfeita.')
+        print('[1] - Sim')
+        print('[2] - Não')
+        print()
+        op = input('Digite a opção desejada: ')
+
+        if op == '1':
+            del NomeCliente[indice_cliente]
+            del CpfCliente[indice_cliente]
+            del SenhaCliente[indice_cliente]
+            del EnderecoCliente[indice_cliente]
+            del TelefoneCliente[indice_cliente]
+            del SaldoCliente[indice_cliente]
+            del CarroAlugado[indice_cliente]
+            del HorasAluguel[indice_cliente]
+
+            print('Cadastro excluído com sucesso!')
+        elif op == '2':
+            print('Exclusão de cadastro cancelada.')
+        else:
+            print('Opção inválida!')
+    else:
+        print('Login inválido')
+
+    pausar_execucao()
+
+
 def login(f=None):
     os.system('clear')
     print('========== TELA DE LOGIN')
@@ -97,7 +175,7 @@ def login(f=None):
         if nome in NomeCliente and senha in SenhaCliente:
             indice = NomeCliente.index(nome)
             if SenhaCliente[indice] == senha:
-                return True, indice  # Retorna também o índice do cliente
+                return True, indice  
 
     return False, None
 
@@ -183,8 +261,10 @@ while True:
     print('[2] - ALUGAR')
     print('[3] - LISTAR CLIENTES')
     print('[4] - PESQUISAR')
-    print('[5] - ADICIONAR SALDO')
-    print('[6] - SAIR')
+    print('[5] - EDITAR INFORMAÇÕES DO CLIENTE')
+    print('[6] - EXCLUIR CADASTRO')
+    print('[7] - ADICIONAR SALDO')
+    print('[8] - SAIR')
     print()
     op = input('Digite a opção desejada: ')
 
@@ -197,6 +277,10 @@ while True:
     elif op == '4':
         pesquisarCliente()
     elif op == '5':
-        adicionarSaldo()
+        editarInformacoes()
     elif op == '6':
+        excluirCadastro()
+    elif op == '7':
+        adicionarSaldo()
+    elif op == '8':
         break
