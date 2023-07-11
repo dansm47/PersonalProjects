@@ -217,7 +217,7 @@ def alugarVeiculo():
 
                     if SaldoCliente[indice_cliente] >= valor_total:
                         CarroAlugado[indice_cliente] = indice_veiculo
-                        HorasAluguel.append(horas_aluguel)  # Correção: adiciona as horas de aluguel na lista
+                        HorasAluguel.append(horas_aluguel)  
                         SaldoCliente[indice_cliente] -= valor_total
 
                         os.system('clear')
